@@ -2,9 +2,8 @@ import { gql } from 'apollo-server-lambda';
 
 import { GraphQLObject } from '../types';
 import { mapPost } from '../mappings';
-import pubsub from '../pubsub';
 
-export const typeDefs = gql`
+export const postTypeDefs = gql`
   type Details {
     size: Int
     image: Object
@@ -35,13 +34,9 @@ export const typeDefs = gql`
     posts: [Post!]!
     post(slug: String!): Post
   }
-
-  extend type Subscription {
-    viewedPost: Post
-  }
 `;
 
-export const resolvers = {
+export const postResolvers = {
   Object: GraphQLObject,
   Query: {
     posts: async (_, __, { dataSources: { contentfulAPI } }) => {
@@ -50,19 +45,8 @@ export const resolvers = {
     },
     post: async (_, { slug }, { dataSources: { contentfulAPI } }) => {
       const { items } = await contentfulAPI.getEntry('recipe', slug);
-
       const post = items.map(mapPost)[0];
-
-      pubsub.publish('viewedPost', {
-        viewedPost: post,
-      });
-
       return post;
     }
-  },
-  Subscription: {
-    viewedPost: {
-      subscribe: () => pubsub.asyncIterator(['viewedPost']),
-    },
   },
 };

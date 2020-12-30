@@ -1,8 +1,8 @@
 frameworkVersion: '2'
 
-service: veganrecipes-datasource
+service: veganrecipes-datasource-api
 
-app: veganrecipes-api
+app: serverless-vegan-recipes-api
 org: avjpldeveloper
 
 custom:

@@ -5,7 +5,7 @@ export const RECIPES_QUERY = gql`
     recipes: posts {
       id
       title
-      slug,
+      slug
       image {
         file {
           url

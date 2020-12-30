@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-lambda';
 
-const ContentfulAPI = require('../apollo/datasourses/contentful');
-const { schema } = require('../apollo/schema');
+import ContentfulAPI from '../apollo/datasourses/contentful';
+import { schema } from '../apollo/schema';
 
 const apolloServer = new ApolloServer({
   schema,

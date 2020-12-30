@@ -1,2 +1,1 @@
-export { RECIPES_QUERY } from './recipes';
-export { RECIPE_QUERY } from './recipes';
+export { RECIPES_QUERY, RECIPE_QUERY } from './recipes';
